@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ipclown.com - The Big Top Lookup</title>
+    <meta name="description" content="Quickly check your public IPv4 and IPv6 address, ISP, ASN, approximate location, privacy hints, and browser details.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" aria-label="Site header">
+        <div class="brand-lockup">
+          <a class="brand" href="/" aria-label="ipclown.com home">
+            <img class="brand-logo" src="assets/ipclown-wordmark-web.png" alt="ipclown.com" width="900" height="300">
+          </a>
+          <p class="header-kicker">The Big Top Lookup</p>
+        </div>
+        <img class="header-route-map" src="assets/circus-route-map-web.png" alt="Circus route map" width="900" height="300">
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="ticket-stub">Route ticket issued</div>
+          <h1 id="hero-title">Your public IPs are in the ring.</h1>
+          <p class="hero-copy" id="hero-status">The clown is sniffing out your public IPs.</p>
+
+          <div class="ip-grid" aria-label="Detected IP addresses">
+            <article class="ip-card accent-red">
+              <div class="ip-card-header">
+                <div>
+                  <p class="eyebrow">IPv4</p>
+                  <p class="status-pill" id="ipv4-status">Sniffing</p>
+                </div>
+                <button class="icon-button" type="button" data-copy-target="ipv4" data-copy-label="IPv4" disabled>
+                  <span aria-hidden="true">Copy</span>
+                </button>
+              </div>
+              <p class="ip-address loading" id="ipv4-address">Sniffing...</p>
+            </article>
+
+            <article class="ip-card accent-teal" id="ipv6-card">
+              <div class="ip-card-header">
+                <div>
+                  <p class="eyebrow">IPv6</p>
+                  <p class="status-pill teal" id="ipv6-status">Sniffing</p>
+                </div>
+                <button class="icon-button" type="button" data-copy-target="ipv6" data-copy-label="IPv6" id="copy-ipv6" disabled>
+                  <span aria-hidden="true">Copy</span>
+                </button>
+              </div>
+              <p class="ip-address ipv6 loading" id="ipv6-address">Sniffing...</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="details-layout" aria-label="IP details">
+          <article class="detail-panel">
+            <div class="panel-heading">
+              <span class="panel-icon red" aria-hidden="true"></span>
+              <div>
+                <h2>Route Ticket</h2>
+                <p>Network details without the juggling act.</p>
+              </div>
+            </div>
+            <dl class="detail-list">
+              <div>
+                <dt>ISP</dt>
+                <dd id="isp">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd id="location">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>Country</dt>
+                <dd id="country">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>ASN</dt>
+                <dd id="asn">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>Timezone</dt>
+                <dd id="timezone">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>Local Time</dt>
+                <dd id="local-time">Sniffing...</dd>
+              </div>
+              <div>
+                <dt>Reverse DNS</dt>
+                <dd id="reverse-dns">Sniffing...</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="detail-panel">
+            <div class="panel-heading">
+              <span class="panel-icon teal" aria-hidden="true"></span>
+              <div>
+                <h2>Shoe Inspection</h2>
+                <p>Browser and device details that came stomping in.</p>
+              </div>
+            </div>
+            <dl class="detail-list two-column">
+              <div>
+                <dt>User Agent</dt>
+                <dd id="user-agent" class="compact-value">Checking...</dd>
+              </div>
+              <div>
+                <dt>Screen</dt>
+                <dd id="screen-size">Checking...</dd>
+              </div>
+              <div>
+                <dt>Language</dt>
+                <dd id="language">Checking...</dd>
+              </div>
+              <div>
+                <dt>Browser Timezone</dt>
+                <dd id="browser-timezone">Checking...</dd>
+              </div>
+              <div>
+                <dt>Timezone Match</dt>
+                <dd id="timezone-match">Checking...</dd>
+              </div>
+              <div>
+                <dt>Cookies</dt>
+                <dd id="cookies">Checking...</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="detail-panel">
+            <div class="panel-heading">
+              <span class="panel-icon yellow" aria-hidden="true"></span>
+              <div>
+                <h2>Nose Test</h2>
+                <p>Privacy clues from the edge of the tent.</p>
+              </div>
+            </div>
+            <dl class="detail-list">
+              <div>
+                <dt>VPN/Proxy</dt>
+                <dd id="vpn-proxy"><span class="badge">Sniffing</span></dd>
+              </div>
+              <div>
+                <dt>Hosting</dt>
+                <dd id="hosting-status"><span class="badge">Sniffing</span></dd>
+              </div>
+              <div>
+                <dt>Privacy Flags</dt>
+                <dd id="privacy-flags" class="badge-list"><span class="badge">Sniffing</span></dd>
+              </div>
+              <div>
+                <dt>IPv6 Status</dt>
+                <dd><span class="badge blue" id="ipv6-detail">Sniffing</span></dd>
+              </div>
+            </dl>
+          </article>
+        </section>
+
+        <section class="report-panel" aria-label="Copy full report">
+          <div>
+            <h2>Need the whole tent manifest?</h2>
+            <p>Copies IPv4, IPv6, ISP, location, ASN, and shoe inspection details.</p>
+          </div>
+          <button class="report-button" type="button" id="copy-report">Copy Full Clown Report</button>
+        </section>
+
+        <p class="fine-print">Approximate location only. We are clowns, not cartographers.</p>
+      </main>
+    </div>
+
+    <div class="manual-copy" id="manual-copy" hidden>
+      <div class="manual-copy-panel" role="dialog" aria-modal="true" aria-labelledby="manual-copy-title">
+        <div>
+          <h2 id="manual-copy-title">Clipboard permission tripped over its shoes.</h2>
+          <p>Select the text below and copy it manually.</p>
+        </div>
+        <textarea id="manual-copy-text" rows="10" readonly></textarea>
+        <button class="report-button" type="button" id="manual-copy-close">Done</button>
+      </div>
+    </div>
+
+    <div class="toast" role="status" aria-live="polite" id="toast">Full clown report copied. Try not to honk at work.</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
