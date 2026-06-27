@@ -130,22 +130,17 @@ function showToast(message) {
 }
 
 async function copyText(text, successMessage) {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-    } else {
-      fallbackCopy(text);
-    }
-    showToast(successMessage);
-  } catch {
+  if (navigator.clipboard && window.isSecureContext) {
     try {
-      fallbackCopy(text);
+      await navigator.clipboard.writeText(text);
       showToast(successMessage);
+      return;
     } catch {
-      showManualCopy(text);
-      showToast("Clipboard blocked. Manual copy is ready.");
+      // fall through to manual copy
     }
   }
+  showManualCopy(text);
+  showToast("Clipboard blocked. Manual copy is ready.");
 }
 
 function showManualCopy(text) {
@@ -153,23 +148,6 @@ function showManualCopy(text) {
   elements.manualCopy.hidden = false;
   elements.manualCopyText.focus();
   elements.manualCopyText.select();
-}
-
-function fallbackCopy(text) {
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.top = "-999px";
-  document.body.appendChild(textarea);
-  textarea.select();
-
-  const copied = document.execCommand("copy");
-  document.body.removeChild(textarea);
-
-  if (!copied) {
-    throw new Error("Copy command failed");
-  }
 }
 
 async function fetchJson(url, timeoutMs = 7000) {
